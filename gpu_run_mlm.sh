@@ -1,6 +1,8 @@
-# export NCCL_IB_DISABLE=1
+rm -rf ./test-bert-zero2-multigpu
+
 export BS=32
 export NCCL_DEBUG=INFO
+export NCCL_SHM_DISABLE=1
 
 deepspeed run_mlm.py \
 --seed 42 \
@@ -11,7 +13,7 @@ deepspeed run_mlm.py \
 --per_device_train_batch_size $BS \
 --per_device_eval_batch_size $BS \
 --do_train \
---output_dir ./test-bert-zero2 \
+--output_dir ./test-bert-zero2-multigpu \
 --fp16 \
 --logging_first_step \
 --max_seq_length 300 \
